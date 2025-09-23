@@ -142,7 +142,9 @@ Standard error (1000 ha): 432.54
 
    *Note: `upside_mult` and `downside_mult` require tuning to calibrate the model to the reference period.*
 
-3. Near the top of the script, adjust scalars:  
+   *Note: Coefficients for updating the code to other countries and periods are contained in ‘Supplementary Coefficients.xls’*
+
+4. Near the top of the script, adjust scalars:  
    - `arable_cap` (upper bound on arable land share)  
    - `other_land_min` (minimum share for Other land)  
    - `planted_forest_target` (fixed share for planted forest)  
