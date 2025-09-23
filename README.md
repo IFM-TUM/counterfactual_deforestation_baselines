@@ -96,7 +96,7 @@ See methods section in manuscript for a detailed description.
 3. Download the script file `Supplementary R code.R`.  
 4. In R or RStudio, run:  
    ```R
-   source("<path_to_the_script_directory>Supplementary R code.R") # Replace <path_to_the_script_directory> with the filepath to the script on your system
+   source("<path_to_the_script_directory>/Supplementary R code.R") # Replace <path_to_the_script_directory> with the filepath to the script on your system
    ```
 
 The script automatically iterates through the optimizations and prints the results to the console. For more detail, user can view created R objects (see above) 
