@@ -22,7 +22,7 @@ https://zenodo.org/records/8016364
 
 The script is organized around an iterative simulation workflow with endogenous updating.
 
-1. **Scenarios **: For each Monte Carlo repetition, generates 1000 uncertainty scenarios by sampling profit coefficients for each LULC type from an uncertainty range around expected values.
+1. **Scenarios**: For each Monte Carlo repetition, generates 1000 uncertainty scenarios by sampling profit coefficients for each LULC type from an uncertainty range around expected values.
 
 2. **Robust optimization**: For each set of scenarios, solves a linear programming problem to identify the land-use portfolio that minimizes maximum (normalized) regret.
 
@@ -45,6 +45,9 @@ See the Methods section of the manuscript for further detail
 ---
 
 ## System requirements
+
+### Installation time
+Please plan in about 10 minutes for a full, first-time installation of R, the required packages and the execution of the script.
 
 ### Software dependencies
 
