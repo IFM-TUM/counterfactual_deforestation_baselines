@@ -4,8 +4,7 @@
 
 This R script implements a deforestation modelling approach based on historical profit estimates for alternative land-use/land-cover (LULC) types. It simulates a reference trajectory of hypothetical deforestation rates across multiple periods by assuming that land managers allocate land across seven LULC categories based on uncertain profit expectations. It is designed to accompany the manuscript:
 
-    Knoke, T, Cueva, J, Bingham, L, Kindu, M, Döllerer, M, Fibich, J, Köthke, M, Menzel, A, Ramig, A, Senf, C, Biber, P, Wüpper, D, Hänsel, M, Venmans, F, Hanley, N, & Paul, C. (2025).  
-    *Measuring the deforestation that didn't happen - a global perspective.* (preprint)
+> Knoke, T, Cueva, J, Bingham, L, Kindu, M, Döllerer, M, Fibich, J, Köthke, M, Menzel, A, Ramig, A, Senf, C, Biber, P, Wüpper, D, Hänsel, M, Venmans, F, Hanley, N, & Paul, C.   *Measuring the deforestation that didn't happen - a global perspective.* (preprint)
 
 The methodology is based on the approach originally introduced by:
 
