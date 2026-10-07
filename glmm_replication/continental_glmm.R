@@ -14,18 +14,7 @@
 
 # Install note:   If any R packages needed to run this script are missing, they will be 
 #                 installed automatically by the package-loading block below.
-#                 Package versions are not enforced, but for documentation, the
-#                 versions we used in parentheses:
-
-#                 rstanarm (2.32.2), rstan (2.32.7), StanHeaders (2.39.1), 
-#                 ggplot2 (4.0.3), Matrix (1.7-4), lme4 (2.0-6)
-
-# Resources:      Helpful rstanarm articles:  - Functions   https://mc-stan.org/rstanarm/reference/stan_glmer.html
-#                                             - Priors      https://mc-stan.org/rstanarm/reference/priors.html                                           
-#                 Or use ?stan_glmer          
-
-# Analysis originally performed in JASP 0.18.2 using rstan version 2.32.3
-# Environment used for testing this script: R 4.5.3 (2026-03-11), macOS Tahoe 26.6.2 on Apple Silicon.
+#                 Package versions are not enforced. See README for specific versions. 
 
 # Contacts:       Logan Bingham (logan@tum.de), Thomas Knoke (knoke@tum.de)
 ###############################################################################################################
