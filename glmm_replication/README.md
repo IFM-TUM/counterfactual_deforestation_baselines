@@ -12,8 +12,8 @@ Specifically, it corresponds to Table 6A and Supplementary Figure 5.
 
 | Script | Input |
 | --- | --- |
-| `continental_replication.R` | `clean_continental.csv` | 
-| `transcontinental_replication.R` | `clean_transcontinental.csv` | 
+| `continental_glmm.R` | `clean_continental.csv` | 
+| `transcontinental_glmm.R` | `clean_transcontinental.csv` | 
 
 
 ## Software requirements
