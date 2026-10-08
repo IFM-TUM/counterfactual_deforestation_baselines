@@ -4,9 +4,9 @@ This repository contains supplementary code and input data for the manuscript:
 
 >Knoke, T, Cueva, J, Bingham, L, Kindu, M, Döllerer, M, Fibich, J, Köthke, M, Menzel, A, Ramig, A, Senf, C, Biber, P. Wüpper, D, Hänsel, M, Venmans, F, Hanley, N, & Paul. C. *Measuring the deforestation that didn't happen - a global perspective* (preprint)
 
-This is a general README that provides an overview of the whole repo. Analysis-specific READMEs can be found in the subfolders.
+This document provides a general overview of the whole repo. Analysis-specific READMEs can be found in the subfolders.
 
-## Contents
+## Contents of this repository
 
 | Folder | Contents |
 | --- | --- |
@@ -18,7 +18,7 @@ This is a general README that provides an overview of the whole repo. Analysis-s
 1. Download or clone the repository
 2. Open the folder for the analysis you want to run
 4. Start a fresh R session and and set that folder as the working directory
-5. Run the relevant script following the instructions in the folder's README
+5. Run the R script following the instructions in the folder's README
 
 These analyses use tools that are available to the public at no cost. Running them requires R, which can be downloaded here: https://www.r-project.org/ 
 
@@ -26,7 +26,7 @@ An IDE is also recommended. We use RStudio: https://posit.co/downloads
 
 ## Additional information
 
-The READMEs in the analysis folders clarify the scope of the replications and how to run them. See the manuscript and its other supplementary materials for details on the design, methods, and interpretation of the results. We aspire to update the this document when the manuscript is published, but for the time being an older preprint version is available here: https://doi.org/10.21203/rs.3.rs-7461473/v2
+The READMEs in the subfolders clarify the scope of the replications and how to run them. See the manuscript and its other supplementary materials for details on the design, methods, and interpretation of the results. We aspire to update the this document when the manuscript is published, but for the time being an older preprint version is available at https://doi.org/10.21203/rs.3.rs-7461473/v2
 
  ## Contact
 
