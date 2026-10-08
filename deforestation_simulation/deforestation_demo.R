@@ -763,6 +763,6 @@ p <- ggplot() +
 print(p)
 
 #Optional PDF export
-ggsave(
-  filename = paste0(COUNTRY, ".pdf"), plot = p,width = 12, height = 7, units = "in", device = "pdf", dpi = 150
-  )
+# ggsave(
+#   filename = paste0(COUNTRY, ".pdf"), plot = p,width = 12, height = 7, units = "in", device = "pdf", dpi = 150
+#   )
