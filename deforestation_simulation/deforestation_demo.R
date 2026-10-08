@@ -39,7 +39,7 @@
 
 # Select country from the following list. 
 
-COUNTRY <- "Brazil" # Paste the selected country here with quotes. Name must match the list below exactly
+COUNTRY <- "Paraguay" # Paste the selected country here with quotes. Name must match the list below exactly
 
 #"Angola", "Argentina", "Bolivia", "Brazil", "Cambodia", "Cameroon", "Colombia", "Côte d'Ivoire", 
 # "Ecuador", "Ethiopia", "DR Congo", "Indonesia" , "Lao People's DR", "Madagascar", "Malaysia", 
@@ -745,7 +745,7 @@ p <- ggplot() +
     expand = expansion(mult = c(0.03, 0.05))
   ) +
   labs(
-    title = paste("Simulated deforestation baseline:", COUNTRY),
+    title = paste("Simulated reference scenario:", COUNTRY),
     subtitle = seed_subtitle,
     x = "Year", y = "Deforestation (Kha / year)",color = NULL,
     caption = "Dotted bounds: ± 3 SEM from successful Monte Carlo runs within each year"
@@ -761,3 +761,8 @@ p <- ggplot() +
   )
 
 print(p)
+
+#Optional PDF export
+ggsave(
+  filename = paste0(COUNTRY, ".pdf"), plot = p,width = 12, height = 7, units = "in", device = "pdf", dpi = 150
+  )
