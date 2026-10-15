@@ -7,7 +7,7 @@
 # Inputs:         Data, parameters, and calibrated inputs can be found in the accompanying file:
 #                 replication_inputs.RDS
 
-# Output:         A graph of simulated annual deforestation. Fixed default seeds
+# Output:         A graph of simulated annual deforestation and a results list object. Fixed default seeds
 #                 for the Monte Carlo analysis are provided in the input tables to
 #                 support reproducible runs of this demo.
 
@@ -26,9 +26,11 @@
 # How to use this script:
 #
 #               Save this script and replication_inputs.rds in the same folder 
-#               Set that folder as R's working directory, or else provide the full path in readRDS()
+#               Save any existing R objects you want to keep (this script clears the global environment each time it runs)
+#               Update and uncomment setwd() below, or set the working directory to that folder using your IDE
 #               Select COUNTRY below
 #               Run the entire script
+#               To save the results or plot, uncomment the relevant export commands at the end before
 
 ###############################################################################################################
 
@@ -36,10 +38,15 @@
 
 ###############################################################################################################
 
+# Clear objects from the previous run
+rm(list = ls())
+
+# Set working directory: add your file path to the following line and uncomment it
+#setwd("your_file_path_here/deforestation_simulation")
 
 # Select country from the following list. 
 
-COUNTRY <- "Paraguay" # Paste the selected country here with quotes. Name must match the list below exactly
+COUNTRY <- "Brazil" # Paste the selected country here with quotes. Name must match the list below exactly
 
 #"Angola", "Argentina", "Bolivia", "Brazil", "Cambodia", "Cameroon", "Colombia", "Côte d'Ivoire", 
 # "Ecuador", "Ethiopia", "DR Congo", "Indonesia" , "Lao People's DR", "Madagascar", "Malaysia", 
@@ -760,9 +767,23 @@ p <- ggplot() +
     plot.caption = element_text(size = 8)
   )
 
+
+
+# Store outputs together
+results <- list(
+  model = model_df,
+  correction_summary = correction_summary,
+  summary_tbl = summary_tbl,
+  p = p
+)
+
+# Display plot
 print(p)
 
-#Optional PDF export
-# ggsave(
-#   filename = paste0(COUNTRY, ".pdf"), plot = p,width = 12, height = 7, units = "in", device = "pdf", dpi = 150
+# Optional PDF export
+#  ggsave(
+# filename = paste0(COUNTRY, ".pdf"), plot = p,width = 12, height = 7, units = "in", device = "pdf", dpi = 150
 #   )
+
+# Optional result export
+ # saveRDS(results, file = paste0(COUNTRY, "_results.rds"))

@@ -94,11 +94,13 @@ Make sure that the RDS file is in the same folder as the script, and set that fo
 
 ## Output
 
-- **Format**: R objects in memory and a plotted figure
-- **Location**: Results stored in the R workspace. At the end of the script, there is an option to save the plot as PDF at standard dimensions using `ggsave()`. If desired, uncomment and run this line.
+- **Format**: R objects in memory and a plotted figure. The main outputs are also in a list item `results`.
+- **Location**: By default, the results exist only in the R workspace and are cleared each time the script is run. There are options to save the outputs: if desired, uncomment and run the `ggsave()` and `saveRDS()` lines near the end of the script. 
 - **Expected runtime**: Less than 3 minutes in a standard computing environment.  
 
-Main objects created:
+Main outputs:
+
+The following outputs are available individually and as named elements of `results` (e.g. `results$model_df`):
 
 - `model_df`: annual simulation results for the full simulation period, including  
   - mean annual deforestation rates  
@@ -108,7 +110,7 @@ Main objects created:
   - baseline corrections and identifiers  
 - `correction_summary`: reference period(s) for (re-)calibration and calculated baseline corrections
 - `summary_tbl`: descriptive statistics for each series over the plotting window
--`p`: A ggplot figure showing the simulated profit-oriented baseline deforestation trajectory with uncertainty ribbons and the random seed used.
+-`p`: A ggplot figure showing the simulated profit-oriented reference deforestation trajectory with dotted uncertainty bounds and the random seed used.
 
 ---
 
@@ -116,8 +118,8 @@ Main objects created:
 
 1. Install R from https://www.r-project.org/ . An IDE like RStudio is also recommended: https://posit.co/downloads
 2. Download the folder containing this README, the script `deforestation_demo.R` and the input file `replication_inputs.rds`, or place these files into the same folder.
-3. Start a fresh R session and set that folder as the working directory.
-4. Open `deforestation_demo.R` in your IDE
+3. Start a fresh R session. Remember to save any objects you want to keep, as the script begins by clearing objects from the global environment.
+4. Open `deforestation_demo.R` in your IDE. If needed, set your working directory to the folder containing the script and the input file by providing the filepath in the `setwd()` line just before country selection.
 5. Below the header (roughly line 44), select the country to replicate:
 
       `COUNTRY <- "Brazil"` 
@@ -126,9 +128,9 @@ Main objects created:
 
    `source("deforestation_demo.R", encoding = "UTF-8")`
 
-The script will execute the simulation and plot the simulated deforestation trajectory. 
+The script will execute the simulation and plot the simulated deforestation trajectory. Save any results you want to keep using the `ggsave()` and `saveRDS()` lines at the end of the script. 
 
-To test another country, change the value of `COUNTRY` and repeat steps 3-6. To avoid typos, we suggest pasting the country name with quotations from the commented-out list immediately below the `COUNTRY` assignment line. 
+To test another country, change the value of `COUNTRY` and run the entire script again. To avoid typos, we suggest pasting the country name with quotations from the commented-out list immediately below the `COUNTRY` assignment line. 
 
 Note that the script can run using packages already installed in the user's library (the `pacman` block only installs missing packages; note that it does not enforce package versions). Thus, after the initial run, selecting and running the entire script will not repeat the installation step. 
 
