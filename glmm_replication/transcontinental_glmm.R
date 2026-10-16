@@ -23,6 +23,9 @@
 # Set working directory: add your file path to the following line, then uncomment and run it
 #setwd("your_file_path_here/glmm_replication")
 
+# Clear environment
+rm(list = ls())
+
 # Install any missing packages
 if (!requireNamespace("pacman", quietly = TRUE)) {install.packages("pacman")}
 suppressPackageStartupMessages({pacman::p_load(rstanarm, ggplot2)})

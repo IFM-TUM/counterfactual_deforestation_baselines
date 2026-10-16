@@ -4,7 +4,7 @@
 
 This folder contains supplementary code and data for replicating our analysis of potential leakage effects at the continental and transcontinental levels using Bayesian generalized linear mixed models (GLMMS). It accompanies the manuscript:
 
-> Knoke, T, Cueva, J, Bingham, L, Kindu, M, Döllerer, M, Fibich, J, Köthke, M, Menzel, A, Ramig, A, Senf, C, Biber, P. Wüpper, D, Hänsel, M, Venmans, F, Hanley, N, & Paul. C. *Measuring the deforestation that didn't happen - a global perspective* (preprint)
+> Knoke, T, Cueva, J, Bingham, L, Kindu, M, Döllerer, M, Fibich, J, Köthke, M, Menzel, A, Ramig, A, Senf, C, Biber, P. Wüpper, D, Hänsel, M, Venmans, F, Hanley, N, & Paul. C. *Measuring the deforestation that did not happen - a global perspective* (preprint)
 
 The continental and transcontinental analyses correspond to Tables 6a and 6b, respectively.
 
