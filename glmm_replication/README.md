@@ -6,7 +6,7 @@ This folder contains supplementary code and data for replicating our analysis of
 
 > Knoke, T, Cueva, J, Bingham, L, Kindu, M, Döllerer, M, Fibich, J, Köthke, M, Menzel, A, Ramig, A, Senf, C, Biber, P. Wüpper, D, Hänsel, M, Venmans, F, Hanley, N, & Paul. C. *Measuring the deforestation that didn't happen - a global perspective* (preprint)
 
-Specifically, it corresponds to Table 6A and Supplementary Figure 5.
+The continental and transcontinental analyses correspond to Tables 6a and 6b, respectively.
 
 ## Contents of this folder
 
@@ -26,10 +26,10 @@ An IDE is also recommended. We use RStudio: https://posit.co/downloads
 
 1. If needed, install [R](https://www.r-project.org/) (required) and an IDE like [RStudio](https://posit.co/download/rstudio-desktop/) (recommended).
 
-2. Download this subfolder  or alternatively clone the entire repository and navigate to this folder
-3. Start a new R session
-4. Set this folder (`glmm_replication`) as the working directory
-5. Open the script corresponding to the analysis you want to run, select the entire script, and run it
+2. Download this subfolder (`glmm_replication`)  or alternatively clone the entire repository and navigate to this folder
+3. Open the script corresponding to the analysis you want to run in a new R session 
+4. Replace the example path in `setwd()` with the path to this folder, then uncomment and run that line (or set the working directory using your IDE)
+5. Select the entire script, and run it
 
 Each script runs separately. If desired, store the results before running the other analysis, as variable assignments are re-used and R objects from the previous run may be overwritten.
 
@@ -39,7 +39,9 @@ Model fitting may take some time (for us, <10 minutes). Progress updates are pri
 
 ## Results 
 
-Each script reports fixed-effect posterior means and 95% credible intervals, as well as a descriptive plot. The former print to console and the latter is generated as an R object, with an optional commented-out file export using `ggsave()`
+Each script reports fixed-effect posterior means and 95% credible intervals in the `results` dataframe
+and prints them to the console, along with prior and posterior summaries. The fitted model is stored in the
+`fit` object. Results are not saved automatically.
 
 ## Testing environment and required packages
 

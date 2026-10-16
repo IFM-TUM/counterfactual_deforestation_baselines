@@ -32,11 +32,7 @@
 #               Run the entire script
 #               To save the results or plot, uncomment the relevant export commands at the end before
 
-###############################################################################################################
-
-# Script begins here
-
-###############################################################################################################
+# Script begins here:
 
 # Clear objects from the previous run
 rm(list = ls())
@@ -48,7 +44,7 @@ rm(list = ls())
 
 COUNTRY <- "Brazil" # Paste the selected country here with quotes. Name must match the list below exactly
 
-#"Angola", "Argentina", "Bolivia", "Brazil", "Cambodia", "Cameroon", "Colombia", "Côte d'Ivoire", 
+# "Angola", "Argentina", "Bolivia", "Brazil", "Cambodia", "Cameroon", "Colombia", "Côte d'Ivoire", 
 # "Ecuador", "Ethiopia", "DR Congo", "Indonesia" , "Lao People's DR", "Madagascar", "Malaysia", 
 # "Mexico", "Mozambique", "Myanmar", "Nicaragua", "Nigeria", "Paraguay", "Peru",  
 # "R Congo", "Tanzania", "Thailand", "Venezuela", "Vietnam", "Zambia"
@@ -59,17 +55,17 @@ COUNTRY <- "Brazil" # Paste the selected country here with quotes. Name must mat
 if (!requireNamespace("pacman", quietly = TRUE)) {install.packages("pacman")}
 suppressPackageStartupMessages({pacman::p_load(dplyr, tibble, ggplot2, lpSolve)})
 
-#Read input data and calibrated parameters
-  inputs <- readRDS("replication_inputs.rds")
+# Read input data and calibrated parameters
+inputs <- readRDS("replication_inputs.rds")
 
-  periods_df <- inputs$periods %>% filter(country == COUNTRY) %>% arrange(period)
-  profits <- inputs$profits %>% filter(country == COUNTRY)
-  areas <- inputs$initial_areas %>% filter(country == COUNTRY)
-  comparison_df <- inputs$annual_series %>%filter(country == COUNTRY) %>% arrange(year)
-  settings <- inputs$country_settings %>% filter(country == COUNTRY)
-  correction <- inputs$baseline_corrections %>%filter(country == COUNTRY)
+periods_df <- inputs$periods %>% filter(country == COUNTRY) %>% arrange(period)
+profits <- inputs$profits %>% filter(country == COUNTRY)
+areas <- inputs$initial_areas %>% filter(country == COUNTRY)
+comparison_df <- inputs$annual_series %>%filter(country == COUNTRY) %>% arrange(year)
+settings <- inputs$country_settings %>% filter(country == COUNTRY)
+correction <- inputs$baseline_corrections %>%filter(country == COUNTRY)
 
-  stopifnot(nrow(correction) > 0)
+stopifnot(nrow(correction) > 0)
 
 
 # Parameters (do not modify)
@@ -84,7 +80,7 @@ forced_start_year <- 1990
 initial_areas_1000ha <- setNames(areas$area_1000ha, areas$land_use)
 obs_to_ha_mult <- 1000 # units 
 
-#Seed management (default replication seeds provided in input tables)
+# Seed management (default replication seeds provided in input tables)
 stopifnot(nrow(settings) == 1L)
 RNGkind(kind = "Mersenne-Twister", normal.kind = "Inversion", sample.kind = "Rejection")
 master_seed_used <- as.integer(settings$default_seed)
@@ -121,13 +117,11 @@ normalize_lu_shares <- function(x, lu = LU, tol = 1e-10) {
   x 
 }
 
-######################################################################################################################
-######################################################################################################################
+
 
 # Functions
 
-######################################################################################################################
-######################################################################################################################
+
 
 # Generate uncertainty scenarios
 generate_uncertainty_scenarios <- function(
@@ -138,7 +132,6 @@ generate_uncertainty_scenarios <- function(
     downside_mult, 
     seed
 ) {
-  #if (length(seed) != 1 || is.na(seed)) stop("seed must be a single value and not NA") 
   set.seed(as.integer(seed)) 
   
   
@@ -163,7 +156,7 @@ generate_uncertainty_scenarios <- function(
     scenarios_matrix[, lu] <- expected + (upside_mult * sd) - u * (upside_mult + downside_mult) * sd 
   }
   
-  #Store
+  # Store
   tibble(
     scenario_id = 1:n_scenarios,
     planted_forest = scenarios_matrix[, "planted_forest"],
@@ -178,13 +171,12 @@ generate_uncertainty_scenarios <- function(
 # Rescale 30 year allocation to timestep
 scale_to_5_years <- function(f0, f30, planning_period) {  f0 - 5 * (f0 - f30) / planning_period }
 
-###### ###### ###### ############ ######
+
 
 # Build optimization problem and set up solver
 
-###### ############ ############ ######
 
-#Profit components 
+# Profit components 
 build_profit_components <- function(scenarios_data, arable_cap) { 
   
   # Profit matrix 
@@ -224,7 +216,7 @@ build_profit_components <- function(scenarios_data, arable_cap) {
 } 
 
 
-#Build problem
+# Build problem
 build_lp_problem <- function(
     f0, #                       vector of initial LULC shares
     arable_cap, 
@@ -313,12 +305,11 @@ build_lp_problem <- function(
   b[row] <- planted_forest_target
   
   # Constraint: Arable + permanent cap
- 
-    row <- row + 1
-    crop_idx <- which(colnames(pmat) %in% c("arable", "permanent_cropland"))
-    A[row, crop_idx] <- 1
-    dir[row] <- "<="
-    b[row] <- arable_cap
+  row <- row + 1
+  crop_idx <- which(colnames(pmat) %in% c("arable", "permanent_cropland"))
+  A[row, crop_idx] <- 1
+  dir[row] <- "<="
+  b[row] <- arable_cap
   
   # Return list for lpSolve()
   list(obj = obj, A = A, dir = dir, b = b, L = L)
@@ -423,7 +414,7 @@ run_year_batch <- function(
   base_seed
 ) {
   
-  #Store
+  # Store
   annual_rates <- numeric(0) 
   annual_loss_1000ha <- numeric(0)
   f5_list <- list() 
@@ -484,10 +475,9 @@ run_year_batch <- function(
 
 
 # Loop B: Repeat Loop A for all periods 
-run_all_periods_endogenous <- function(periods_df, 
-                                       f0_period1)  {  
+run_all_periods_endogenous <- function(periods_df, f0_period1)  {  
   
-  total_area_1000ha <- sum(initial_areas_1000ha) # Sum initial areas
+  total_area_1000ha <- sum(initial_areas_1000ha) 
   
   f0_current <- f0_period1  
   all_year_results <- list() 
@@ -539,7 +529,7 @@ run_all_periods_endogenous <- function(periods_df,
       }
     } 
     
-    #Annual summaries for this period
+    # Annual summaries for this period
     year_df_p <- bind_rows(year_summaries) %>% filter(year <= periods_df$end_year[p])
     all_year_results[[p]] <- year_df_p 
     
@@ -577,10 +567,10 @@ apply_baseline_correction <- function(year_df, obs_mean_ha, years, apply_years,
   
   if (!is.finite(model_mean)) stop("Model baseline mean is NA/Inf (check coverage of years).")
   
-  #Align the simulated reference mean with the observed reference rate
+  # Align the simulated reference mean with the observed reference rate
   correction_ha <- obs_mean_ha - model_mean  # Note: Only after selecting a calibration (external to this replication script)
   
-  #Baseline correction only applied within the correction window
+  # Baseline correction only applied within the correction window
   correction_by_year <- ifelse(year_df$year %in% apply_years, correction_ha, 0)
   
   out <- year_df %>%
@@ -595,13 +585,8 @@ apply_baseline_correction <- function(year_df, obs_mean_ha, years, apply_years,
 }
 
 
-######################################################################################
-######################################################################################
-
 # Run model and plot results
 
-######################################################################################
-######################################################################################
 
 # Initial composition
 total_area_1000ha <- sum(initial_areas_1000ha)
@@ -617,7 +602,7 @@ observed_ha <- comparison_df$observed * obs_to_ha_mult
 published_baseline_ha <- comparison_df$published_baseline * obs_to_ha_mult
 published_baseline_sem_ha <- comparison_df$published_baseline_sem * obs_to_ha_mult
 
-#Calculate baseline corrections using the (re)calibration periods for this country
+# Calculate baseline corrections using the (re)calibration periods for this country
 model_uncorrected_df <- model_df
 corrected_parts <- list()
 correction_summary <- correction
@@ -625,12 +610,12 @@ correction_summary$baseline_correction_ha <- NA
 
 for (i in seq_len(nrow(correction))) {
   
-  #Get years for row i
+  # Get years for row i
   baseline_years <- correction$observed_start_year[i]:correction$observed_end_year[i]
   baseline_years_model <- correction$model_start_year[i]:correction$model_end_year[i]
   apply_years <- correction$apply_start_year[i]:correction$apply_end_year[i]
   
-  #Skip correction windows beyond this run if...
+  # Skip correction windows beyond this run if...
   if (!any(model_uncorrected_df$year %in% apply_years)) next
   
   if (!all(baseline_years_model %in% model_uncorrected_df$year)) {
@@ -643,7 +628,7 @@ for (i in seq_len(nrow(correction))) {
     summarise(mu = mean(v, na.rm = TRUE)) %>% 
     pull(mu) 
   
-  #Perform correction
+  # Perform correction
   corrected <- apply_baseline_correction(model_uncorrected_df, obs_mean_ha = obs_baseline_mean,
     years = baseline_years_model, apply_years = apply_years)
   

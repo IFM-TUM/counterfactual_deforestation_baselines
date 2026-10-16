@@ -1,13 +1,14 @@
 # Transcontinental leakage analysis 
 
-# Purpose:        Reproduce Bayesian GLMM transcontinental leakage analysis (Table 6B, Fig S5 bottom)
+# Purpose:        Reproduce Bayesian GLMM transcontinental leakage analysis (Table 6B)
 
 # Inputs:         clean_transcontinental.csv: Values are in kha, reduction_t1 is lagged by 1 year
 
-# Output:         Fixed effect posterior means and 95% credible intervals and a descriptive plot
+# Output:         Fixed effect posterior means and 95% credible intervals stored in results
+#                 and printed to console
 
 # Instructions:   Save the script and input file in the same folder
-#                 Set that folder as R's working directory or provide the full path in read.csv()
+#                 Set that folder as R's working directory using the setwd() line below or your IDE
 #                 Run the entire script
 #                 Model fitting may take some time (for us, <10 minutes) 
 
@@ -17,10 +18,12 @@
               
 # Contacts:       Logan Bingham (logan@tum.de), Thomas Knoke (knoke@tum.de)
 
-###############################################################################################################
+# Script begins here:
 
+# Set working directory: add your file path to the following line, then uncomment and run it
+#setwd("your_file_path_here/glmm_replication")
 
-#Install any missing packages
+# Install any missing packages
 if (!requireNamespace("pacman", quietly = TRUE)) {install.packages("pacman")}
 suppressPackageStartupMessages({pacman::p_load(rstanarm, ggplot2)})
 
@@ -32,11 +35,8 @@ data$continent <- factor(data$continent)
 data$year <- factor(data$year)
 
 
-########################################################################################
-
 # Model and priors
 
-########################################################################################
 
 # Transcontinental
 model_formula <- increase ~ reduction_t1 + counterfactual + (1 + counterfactual | continent) + 
@@ -48,11 +48,10 @@ sd_y <- sd(data$increase) #SD of increased deforestation
 slope_prior_sd <- 2.5 * sd_y / c(sd(data$reduction_t1), sd(data$counterfactual))
 
 
-########################################################################################
 
 # Fit model
 
-########################################################################################
+
 
 fit <- stan_glmer(
   formula = model_formula,
@@ -91,12 +90,10 @@ fit <- stan_glmer(
   refresh = 2000 
 )
 
-          
-########################################################################################
+        
 
 # Fixed effects summaries 
 
-########################################################################################
 
 terms <- c("(Intercept)", "reduction_t1", "counterfactual")
 draws <- as.matrix(fit)[, terms, drop=FALSE] 
@@ -112,43 +109,9 @@ results <- data.frame(
 # Optional diagnostic
 #rstan::check_hmc_diagnostics(fit$stanfit) 
 
-#Results to console
-prior_summary(fit) # Priors 
-print(summary(fit, pars=terms, probs=c(0.025, 0.975)), digits = 5) # Posterior summary & parameter diagnostics
-
-########################################################################################
-
-# Plotting (Supplementary Figure 5, bottom)
-
-########################################################################################
-
-fig <- ggplot(data, aes(x=reduction_t1, y = increase, color = continent)) +
-  geom_point(size=2.5) +
-  geom_smooth(method="lm", formula = y ~ x, se = FALSE, linewidth = 0.8) + # Note: lines are linear regressions by continent for illustration
-  scale_color_manual(
-    values = c("1" = "#11AFE0", "2" = "#ED7D31", "3" = "#237632"), breaks = c("1", "2", "3"), 
-    labels = c("Latin America", "Africa", "Asia"), name = NULL
-  ) +
-  scale_x_continuous(breaks=seq(-2000, 0, 500))+
-  scale_y_continuous(breaks = seq(0, 1400, 200)) +
-  coord_cartesian(xlim = c(-2000,0), ylim = c(0, 1400))+
-  labs(
-    title = "Transcontinental relationships",
-    x = "Deforestation reduction (year t-1) (1,000 ha)",
-    y = "Additional deforestation in other countries \n on other continents (1,000 ha)"
-  )+
-  theme_classic(base_size=12) +
-  theme(legend.position = "top", plot.title = element_text(hjust=0.5))
-
-print(fig)
-
-# Optional figure export as pdf
-#ggsave("transcontinental.pdf", plot = fig, width = 7.5, height = 5.5, units = "in", bg = "white")
-
-# Optional diagnostic
-#rstan::check_hmc_diagnostics(fit$stanfit) 
-
-#Results to console
+# Results to console
 print(results, digits = 5)
 prior_summary(fit) # Priors 
 print(summary(fit, pars=terms, probs=c(0.025, 0.975)), digits = 5) # Posterior summary & parameter diagnostics
+
+
