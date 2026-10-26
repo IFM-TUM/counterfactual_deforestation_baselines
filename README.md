@@ -1,4 +1,4 @@
-# README: Supplementary code and data for "Measuring the deforestation that didn't happen"
+# README: Supplementary code and data for "Measuring the deforestation that did not happen"
 
 This repository contains supplementary code and input data for the manuscript:
 
