@@ -1,4 +1,4 @@
-# README: Profit-oriented reference deforestation simulation (complete 28-country sample and all study periods)
+# README: Profit-oriented reference deforestation simulation (28-country sample)
 
 ## Description
 
