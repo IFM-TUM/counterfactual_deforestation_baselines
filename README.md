@@ -17,8 +17,8 @@ This document provides a general overview of the whole repo. Analysis-specific R
 
 1. Download or clone the repository
 2. Open the folder for the analysis you want to run
-4. Start a fresh R session and and set that folder as the working directory
-5. Run the R script following the instructions in the folder's README
+3. Start a fresh R session and set that folder as the working directory
+4. Run the R script following the instructions in the folder's README
 
 These analyses use tools that are available to the public at no cost. Running them requires R, which can be downloaded here: https://www.r-project.org/ 
 
