@@ -24,7 +24,7 @@ The script is organized around an iterative simulation workflow with endogenous 
 
 2. **Robust optimization**: For each set of scenarios, the script builds and solves a linear programming problem to identify the land-use portfolio that minimizes maximum normalized regret.
 
-3. **Deforestation accounting** : Optimal allocations over a 30-year planning horizon are converted to annual deforestation rates over 5-year operational periods. The implied 5-year change in natural forest share is converted into an annual deforestation rate and an annual forest-loss area. After 5 years, landowners re-asses and update their allocation targets.
+3. **Deforestation accounting** : Optimal allocations over a 30-year planning horizon are converted to annual deforestation rates over 5-year operational periods. The implied 5-year change in natural forest share is converted into an annual deforestation rate and an annual forest-loss area. After 5 years, landowners reasses and update their allocation targets.
 
 4. **Monte Carlo aggregation**: Each simulated year consists of 50 Monte Carlo repetitions. Results are aggregated to produce a mean annual deforestation estimate and associated standard error.
 
@@ -49,7 +49,7 @@ See the manuscript and its other supplements for further detail.
 
 ### Hardware 
 
-The script is intended to run on a standard desktop or laptop. Memory, storage, and execution time depend ont he R installation and computing environment.
+The script is intended to run on a standard desktop or laptop. Memory, storage, and execution time depend on the R installation and computing environment.
 
 ### Installation time
 
@@ -57,7 +57,7 @@ Installation time depends on whether R and the required packages are already ins
 
 ### Software 
 
-The  main development environment uses R 5.4.3 (2026.03.11), though backwards compatibility is likely (the script was also tested with R4.2.2(2022-10-31)).
+The  main development environment uses R 4.5.3 (2026.03.11), though backwards compatibility is likely (the script was also tested with R4.2.2(2022-10-31)).
 
 Required R packages (versions we used in parentheses):
 
@@ -73,13 +73,13 @@ We tested the workflow using the following operating systems:
 - Windows 11 Pro (64-bit)
 - Windows 10 x64 using R 4.2.2
 
-An additional Windows test used `pacman 0.5.1, dplyr 1.0.10, tibble 3.1.8, ggplot2 3.4.0, and lpSolve 5.6.20`. A previous single-country version of the demo script was also tested on macOS Sonoma 14.7.6 (Intel). That version, which can be found in the version history of this repository under the `initial-submission` tag, closely resembles this one. Most of the adjustments to expand the workflow to the full sample involved adjusting input tables and interating over them.
+An additional Windows test used `pacman 0.5.1, dplyr 1.0.10, tibble 3.1.8, ggplot2 3.4.0, and lpSolve 5.6.20`. A previous single-country version of the demo script was also tested on macOS Sonoma 14.7.6 (Intel). That version, which can be found in the version history of this repository under the `initial-submission` tag, closely resembles this one. Most of the adjustments to expand the workflow to the full sample involved adjusting input tables and iterating over them.
 
 ---
 
 ## Inputs
 
-The script requires a single external input file, `replication_inputs.RDS`, which the script assigns to the R object `inputs`.  It contains all data and parameters necessary to run the simulation, including:
+The script requires a single external input file, `replication_inputs.rds`, which the script assigns to the R object `inputs`.  It contains all data and parameters necessary to run the simulation, including:
 
   - `periods`: period identifiers, start and end years, and period-specific LULC constraints 
   - `profits`: profit coefficients and uncertainty SDs by country, period, and LULC
@@ -100,9 +100,9 @@ Make sure that the RDS file is in the same folder as the script, and set that fo
 
 Main outputs:
 
-The following outputs are available individually and as named elements of `results` (e.g. `results$model_df`):
+The following outputs are available individually and as named elements of `results` (e.g. `results$model`):
 
-- `model_df`: annual simulation results for the full simulation period, including  
+- `model_df` (stored as `results_model`): annual simulation results for the full simulation period, including  
   - mean annual deforestation rates  
   - standard errors across Monte Carlo repetitions  
   - annual forest loss in 1000 ha  
@@ -110,7 +110,7 @@ The following outputs are available individually and as named elements of `resul
   - baseline corrections and identifiers  
 - `correction_summary`: reference period(s) for (re-)calibration and calculated baseline corrections
 - `summary_tbl`: descriptive statistics for each series over the plotting window
--`p`: A ggplot figure showing the simulated profit-oriented reference deforestation trajectory with dotted uncertainty bounds and the random seed used.
+- `p`: A ggplot figure showing the simulated profit-oriented reference deforestation trajectory with dotted uncertainty bounds and the random seed used.
 
 ---
 
@@ -124,7 +124,7 @@ The following outputs are available individually and as named elements of `resul
 
       `COUNTRY <- "Brazil"` 
 
-6. After assigning your chosen country to `COUNTRY`, select the entire script and run it. Alternatively, you can run it from theconsole with the command:
+6. After assigning your chosen country to `COUNTRY`, select the entire script and run it. Alternatively, you can run it from the console with the command:
 
    `source("deforestation_demo.R", encoding = "UTF-8")`
 

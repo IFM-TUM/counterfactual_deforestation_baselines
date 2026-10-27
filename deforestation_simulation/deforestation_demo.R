@@ -1,11 +1,11 @@
 
-# Replication demo: profit-oriented counterfactual deforestation
+# Replication demo: profit-oriented reference deforestation
 
 # Purpose:        This script reproduces the modeling workflow for a user-selected country
 #                 using open-source tools.
 
 # Inputs:         Data, parameters, and calibrated inputs can be found in the accompanying file:
-#                 replication_inputs.RDS
+#                 replication_inputs.rds
 
 # Output:         A graph of simulated annual deforestation and a results list object. Fixed default seeds
 #                 for the Monte Carlo analysis are provided in the input tables to
@@ -19,7 +19,7 @@
 #                 Note that package versions are not enforced. For conflicts between versions, 
 #                 see README and attached documentation.
 
-# Contacts:       Logan Bingham (logan@tum.de), Thomas Knoke (knoke @tum.de), 
+# Contacts:       Logan Bingham (logan@tum.de), Thomas Knoke (knoke@tum.de), 
 #                 Jorge Cueva (jorge.cueva@tum.de) Jonathan Fibich (jonathan.fibich@tum.de),
 #                 Caroline von Webenau (c.webenau@gmx.de)
 
@@ -30,7 +30,7 @@
 #               Update and uncomment setwd() below, or set the working directory to that folder using your IDE
 #               Select COUNTRY below
 #               Run the entire script
-#               To save the results or plot, uncomment the relevant export commands at the end before
+#               To save the results or plot, uncomment the relevant export commands at the end
 
 # Script begins here:
 
